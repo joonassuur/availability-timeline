@@ -1,18 +1,6 @@
-.available {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background: green;
+* {
+  box-sizing: border-box;
 }
-.unavailable {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background: red;
-}
-.partially {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background: yellow;
+body {
+  color: #b3b3b3;
 }

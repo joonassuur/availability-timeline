@@ -6,7 +6,10 @@ import "./App.scss";
 function App() {
   return (
     <div className="App">
-      <DataBar />
+      <DataBar projectName="Project A" />
+      <DataBar projectName="Project B" />
+      <DataBar projectName="Project C" />
+      <DataBar projectName="Project D" />
     </div>
   );
 }

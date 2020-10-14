@@ -19,7 +19,7 @@ const dataGenerator = (): ReturnedDataTypes => {
       return "available";
     }
     if (Math.random() < 0.5) {
-      return "partially";
+      return "partially-available";
     }
     return "unavailable";
   };
@@ -38,12 +38,12 @@ const dataGenerator = (): ReturnedDataTypes => {
         (a) => a.availability === "unavailable"
       );
       const partially: object[] = tempArr.filter(
-        (a) => a.availability === "partially"
+        (a) => a.availability === "partially-available"
       );
       if (unavailable.length > 0) {
         availabilityBars.push("unavailable");
       } else if (partially.length > 0) {
-        availabilityBars.push("partially");
+        availabilityBars.push("partially-available");
       } else {
         availabilityBars.push("available");
       }

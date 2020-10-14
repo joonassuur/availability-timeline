@@ -1,18 +1,46 @@
-.available {
+.project-container {
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  background: green;
-}
-.unavailable {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background: red;
-}
-.partially {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background: yellow;
+  margin-bottom: -1px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  .bars-container {
+    margin: .5em 0;
+    .bar {
+      display: inline-block;
+      width: 10px;
+      margin: 0 1px;
+      height: 40px;
+      &.available {
+        background: #79e89e;
+      }
+      &.unavailable {
+        background: #d05855;
+      }
+      &.partially-available {
+        background: #f7c573;
+      }
+    }
+  }
+
+  .available-time {
+    display: flex;
+    margin: 0 1px;
+    justify-content: space-between;
+    .project-title {
+      color: #666666;
+      font-weight: bold;
+    }
+    .current-availability {
+      text-transform: capitalize;
+    }
+    & .available {
+      color: #79e89e;
+    }
+    & .unavailable {
+      color: #d05855;
+    }
+    & .partially-available {
+      color: #f7c573;
+    }
+  }
 }
