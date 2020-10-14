@@ -1,0 +1,18 @@
+.available {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: green;
+}
+.unavailable {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: red;
+}
+.partially {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: yellow;
+}
