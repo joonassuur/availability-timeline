@@ -3,17 +3,21 @@ import dataGenerator from "../../utils/dataGenerator";
 import { DataStruct } from "../../types/types";
 
 const DataBar = () => {
+  // minutesArray = array of entire 24 hours, with every minute corresponding to availability
+  // availabilityBars = colored bars chopped to 20 minute chunks, where color represents the worst event in 20 minutes
   const { minutesArray, availabilityBars } = dataGenerator();
 
+  //availability strings for every minute
   const availabilityStrings: string[] = [];
-  minutesArray.map((e) => {
-    e.map((x: DataStruct) => availabilityStrings.push(x.availability));
-  });
-  console.log("strings", availabilityStrings)
+  minutesArray.map((e) =>
+    e.map((x: DataStruct) => availabilityStrings.push(x.availability))
+  );
 
-  const aa = availabilityStrings.filter((x) => x === "available").length;
-  const totalUptime = (Math.round((aa / 1440) * 1000) / 1000);
-  console.log(totalUptime * 100)
+  //filter out all the "available" strings in availabilityStrings array
+  const uptimeFilter = availabilityStrings.filter((x) => x === "available")
+    .length;
+  const totalUptime = Math.round((uptimeFilter / 1440) * 1000) / 1000;
+  console.log(totalUptime * 100);
   return (
     <div>
       {availabilityBars.map((availability, i) => (
@@ -26,7 +30,7 @@ const DataBar = () => {
               const rhours = Math.floor(hours);
               const minutes = (hours - rhours) * 60;
               const rminutes = Math.round(minutes);
-              console.log("h" + rhours, "m" + rminutes);
+              console.log("h" + rhours, "m" + rminutes, e.availability);
             })
           }
           key={i}

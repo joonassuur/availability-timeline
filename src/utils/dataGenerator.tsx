@@ -10,6 +10,7 @@ const dataGenerator = (): ReturnedDataTypes => {
   // array of availability values for colored bars matching for every 20 minutes
   const availabilityBars: string[] = [];
 
+  // temporary array to be cleaned every 20 iterations (minutes)
   let tempArr: DataStruct[] = [];
 
   // generate availability
@@ -30,7 +31,7 @@ const dataGenerator = (): ReturnedDataTypes => {
       minute: i,
       availability: generateAvailability(),
     });
-    // chop the final array into 20 minute chunks to match them up with availability status from availabilityBars array
+    // chop the minutesArray into 20 minute chunks to match them up with availability status from availabilityBars array
     if (i % 20 === 0) {
       // check if any of the availability values in tempArr match with either "unavailable" or "partially". If they do, mark that entire particular bar with corresponding status, by pushing corresponding value to availabilityBars
       const unavailable: object[] = tempArr.filter(
