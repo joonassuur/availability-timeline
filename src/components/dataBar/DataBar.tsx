@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+
 import { DataBarProps, MouseCoords, NotAvailable } from "../../types/types";
+import { WarningIcon, AlertIcon } from "../icons/Icons";
 
 import "./DataBar.scss";
 const DataBar: React.FC<DataBarProps> = ({
@@ -7,7 +9,6 @@ const DataBar: React.FC<DataBarProps> = ({
   minutesArray,
   availabilityBars,
 }) => {
-  
   // timerange for hovered bar
   const [hoverDetails, setHoverDetails] = useState<String>("");
 
@@ -39,14 +40,21 @@ const DataBar: React.FC<DataBarProps> = ({
           <div
             style={{
               left: `calc(${mouseLocation.xCoord}px - 150px)`,
-              top: `calc(${mouseLocation.yCoord}px - 100px)`,
+              top: `calc(${mouseLocation.yCoord}px - 130px)`,
             }}
             className="hover-container"
           >
             <div className="time-data">{hoverDetails}</div>
             {notAvailableTime ? (
               <>
-                <div className="outage-data">{notAvailableTime}:</div>
+                <div className="outage-data">
+                  <span className="icon">
+                    {notAvailableTime.includes("Partial")
+                      ? AlertIcon()
+                      : WarningIcon()}
+                  </span>
+                  <span className="text">{notAvailableTime}:</span>
+                </div>
                 <div className="outage-data">
                   {notAvailableDetails?.map((e) => e.time)}
                 </div>
@@ -99,6 +107,7 @@ const DataBar: React.FC<DataBarProps> = ({
                       }
                     } else {
                       setNotAvailableTime("");
+                      setNotAvailableDetails(undefined);
                     }
                   });
                 }}

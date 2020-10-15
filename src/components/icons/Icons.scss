@@ -1,0 +1,11 @@
+.alert {
+    color: #f7c573;
+}
+.warning {
+    color: #d05855;
+}
+.alert,
+.warning {
+    font-size: 1.5em;
+    bottom:0;
+}
