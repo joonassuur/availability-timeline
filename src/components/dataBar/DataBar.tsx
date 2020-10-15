@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
+import HoverElement from "./hoverElement/HoverElement";
 import { DataBarProps, MouseCoords, NotAvailable } from "../../types/types";
-import { WarningIcon, AlertIcon } from "../icons/Icons";
 
 import "./DataBar.scss";
 const DataBar: React.FC<DataBarProps> = ({
@@ -18,7 +18,7 @@ const DataBar: React.FC<DataBarProps> = ({
   // outage data for hovered bar
   const [notAvailableDetails, setNotAvailableDetails] = useState<
     NotAvailable
-  >();
+  >([]);
   const [mouseLocation, setMouseLocation] = useState<MouseCoords>({});
 
   // latest availability value
@@ -37,32 +37,12 @@ const DataBar: React.FC<DataBarProps> = ({
       <div className="project-container">
         {/* hover details */}
         {hoverDetails && (
-          <div
-            style={{
-              left: `calc(${mouseLocation.xCoord}px - 150px)`,
-              top: `calc(${mouseLocation.yCoord}px - 130px)`,
-            }}
-            className="hover-container"
-          >
-            <div className="time-data">{hoverDetails}</div>
-            {notAvailableTime ? (
-              <>
-                <div className="outage-data">
-                  <span className="icon">
-                    {notAvailableTime.includes("Partial")
-                      ? AlertIcon()
-                      : WarningIcon()}
-                  </span>
-                  <span className="text">{notAvailableTime}:</span>
-                </div>
-                <div className="outage-data">
-                  {notAvailableDetails?.map((e) => e.time)}
-                </div>
-              </>
-            ) : (
-              <div className="outage-data">No outages</div>
-            )}
-          </div>
+          <HoverElement
+            mouseLocation={mouseLocation}
+            hoverDetails={hoverDetails}
+            notAvailableTime={notAvailableTime}
+            notAvailableDetails={notAvailableDetails}
+          />
         )}
         {/* display total availability */}
         <div className="available-time">
@@ -107,7 +87,7 @@ const DataBar: React.FC<DataBarProps> = ({
                       }
                     } else {
                       setNotAvailableTime("");
-                      setNotAvailableDetails(undefined);
+                      setNotAvailableDetails([]);
                     }
                   });
                 }}
