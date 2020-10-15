@@ -107,4 +107,4 @@ const DataBar: React.FC<DataBarProps> = ({
   );
 };
 
-export default React.memo(DataBar);
+export default DataBar;
