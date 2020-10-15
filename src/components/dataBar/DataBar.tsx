@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DataBarProps, MouseCoords } from "../../types/types";
+import { DataBarProps, MouseCoords, NotAvailable } from "../../types/types";
 
 import "./DataBar.scss";
 const DataBar: React.FC<DataBarProps> = ({
@@ -7,10 +7,17 @@ const DataBar: React.FC<DataBarProps> = ({
   minutesArray,
   availabilityBars,
 }) => {
-  // minutesArray = array of entire 24 hours, with every minute corresponding to availability
-  // availabilityBars = colored bars chopped to 20 minute chunks, where color represents the worst event in 20 minutes
+  
+  // timerange for hovered bar
   const [hoverDetails, setHoverDetails] = useState<String>("");
+
+  // total not available time for hovered bar
   const [notAvailableTime, setNotAvailableTime] = useState<String>("");
+
+  // outage data for hovered bar
+  const [notAvailableDetails, setNotAvailableDetails] = useState<
+    NotAvailable
+  >();
   const [mouseLocation, setMouseLocation] = useState<MouseCoords>({});
 
   // latest availability value
@@ -31,14 +38,19 @@ const DataBar: React.FC<DataBarProps> = ({
         {hoverDetails && (
           <div
             style={{
-              left: `calc(${mouseLocation.xCoord}px - 100px)`,
-              top: `calc(${mouseLocation.yCoord}px - 110px)`,
+              left: `calc(${mouseLocation.xCoord}px - 150px)`,
+              top: `calc(${mouseLocation.yCoord}px - 100px)`,
             }}
             className="hover-container"
           >
             <div className="time-data">{hoverDetails}</div>
             {notAvailableTime ? (
-              <div className="outage-data">{notAvailableTime}</div>
+              <>
+                <div className="outage-data">{notAvailableTime}:</div>
+                <div className="outage-data">
+                  {notAvailableDetails?.map((e) => e.time)}
+                </div>
+              </>
             ) : (
               <div className="outage-data">No outages</div>
             )}
@@ -63,6 +75,7 @@ const DataBar: React.FC<DataBarProps> = ({
                   const yCoord = e.clientY;
                   setMouseLocation({ xCoord, yCoord });
 
+                  // set hover details
                   minutesArray[i].data.forEach(() => {
                     const beginning = minutesArray[i].data[0].time;
                     const end = minutesArray[i].data[19].time;
@@ -75,12 +88,14 @@ const DataBar: React.FC<DataBarProps> = ({
                       );
                       if (filterStatus.length > 0) {
                         setNotAvailableTime(
-                          `Not available for ${minutesArray[i].unavailable.length} minutes`
+                          `Outage for ${minutesArray[i].unavailable.length} minutes`
                         );
+                        setNotAvailableDetails(minutesArray[i].unavailable);
                       } else {
                         setNotAvailableTime(
-                          `Partially unavailable for ${minutesArray[i].unavailable.length} minutes`
+                          `Partial outage for ${minutesArray[i].unavailable.length} minutes`
                         );
+                        setNotAvailableDetails(minutesArray[i].unavailable);
                       }
                     } else {
                       setNotAvailableTime("");

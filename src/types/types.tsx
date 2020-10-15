@@ -21,3 +21,4 @@ export interface DataBarProps {
   minutesArray: any[];
   availabilityBars: string[];
 }
+export type NotAvailable =  TempStruct[];

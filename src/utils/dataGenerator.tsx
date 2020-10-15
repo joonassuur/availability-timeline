@@ -71,6 +71,8 @@ const dataGenerator = (): ReturnedDataTypes => {
       tempArr = [];
     }
   }
+  // minutesArray = array of entire 24 hours, with every minute corresponding to availability
+  // availabilityBars = colored bars chopped to 20 minute chunks, where color represents the worst event in 20 minutes
   return { availabilityBars, minutesArray };
 };
 
