@@ -25,6 +25,7 @@
   .timeline-container {
     display: flex;
     margin: 0 1px;
+    position: relative;
     justify-content: space-between;
     .project-title {
       color: #666666;
@@ -42,7 +43,29 @@
     & .partially-available {
       color: #f7c573;
     }
+    span {
+      background: white;
+      display: inline-block;
+      position: relative;
+      z-index: 2;
+      padding: 0 .5em;
+      &:first-child {
+        padding-left: 0;
+      }
+      &:last-child {
+        padding-right: 0;
+      }
+    }
   }
+  .timeline-container:after {
+    height: 1px;
+    width: 100%;
+    background: #ccc;
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+}
 }
 .hover-container {
   color: #333;
