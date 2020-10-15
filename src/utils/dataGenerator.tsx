@@ -1,17 +1,22 @@
-import { ReturnedDataTypes, DataStruct } from "../types/types";
+import { ReturnedDataTypes, DataStruct, TempStruct } from "../types/types";
 
 const dataGenerator = (): ReturnedDataTypes => {
   // 1440 minutes for 24 hours
   const minutes: number = 1440;
 
+  const today: any = Date.now();
+  const yesterday: any = today - 86400000;
+
+  const yesterdayMinutes = Math.floor(yesterday / 60000);
+
   // array of objects with minutes and an availability value corresponding to each minute
-  const minutesArray: object[] = [];
+  const minutesArray: DataStruct[] = [];
 
   // array of availability values for colored bars matching for every 20 minutes
   const availabilityBars: string[] = [];
 
   // temporary array to be cleaned every 20 iterations (minutes)
-  let tempArr: DataStruct[] = [];
+  let tempArr: TempStruct[] = [];
 
   // generate availability
   const generateAvailability = (): string => {
@@ -26,10 +31,22 @@ const dataGenerator = (): ReturnedDataTypes => {
 
   // randomly generate availability for every minute
   for (let i = 1; i <= minutes; i++) {
+
+    const convertToMS = (yesterdayMinutes + i) * 60000;
+
+    const date = new Date(convertToMS);
+    const day = date.getDate();
+    const month = date.toLocaleString("default", { month: "short" }).toUpperCase();
+    const year = date.getFullYear().toString();
+    const formatYear = year.substr(year.length - 2)
+
+    const time = date.toLocaleTimeString("et-ET");
+
     // push the current iteration to a temporary array
     tempArr.push({
-      minute: i,
+      minute: date,
       availability: generateAvailability(),
+      time: `${time}Z / ${day}${month}${formatYear}`,
     });
     // chop the minutesArray into 20 minute chunks to match them up with availability status from availabilityBars array
     if (i % 20 === 0) {
@@ -47,7 +64,10 @@ const dataGenerator = (): ReturnedDataTypes => {
       } else {
         availabilityBars.push("available");
       }
-      minutesArray.push(tempArr);
+      const filterUnavailable = tempArr.filter(
+        (x) => x.availability !== "available"
+      );
+      minutesArray.push({ data: tempArr, unavailable: filterUnavailable });
       tempArr = [];
     }
   }

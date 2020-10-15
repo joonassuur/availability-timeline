@@ -1,15 +1,25 @@
 import React from "react";
+import dataGenerator from "../../utils/dataGenerator";
+
 import DataBar from "../dataBar/DataBar";
 
 import "./App.scss";
 
 function App() {
+  const projects = ["Project A", "Project B", "Project C", "Project D"];
   return (
     <div className="App">
-      <DataBar projectName="Project A" />
-      <DataBar projectName="Project B" />
-      <DataBar projectName="Project C" />
-      <DataBar projectName="Project D" />
+      {projects.map((project) => {
+        const { minutesArray, availabilityBars } = dataGenerator();
+        return (
+          <DataBar
+            key={project}
+            minutesArray={minutesArray}
+            availabilityBars={availabilityBars}
+            projectName={project}
+          />
+        );
+      })}
     </div>
   );
 }
