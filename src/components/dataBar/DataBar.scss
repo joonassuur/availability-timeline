@@ -4,7 +4,7 @@
   border: 1px solid #ccc;
   padding: 20px;
   .bars-container {
-    margin: .5em 0;
+    margin: 0.5em 0;
     .bar {
       display: inline-block;
       width: 10px;
@@ -46,12 +46,12 @@
 }
 .hover-container {
   color: #333;
-  padding: .5em;
+  padding: 0.5em;
   position: absolute;
   top: 0;
   display: inline-block;
   width: 300px;
-  z-index:99;
+  z-index: 99;
   border: 1px solid #ccc;
   background: #fff;
   .outage-data {
@@ -61,7 +61,7 @@
     margin: 0;
     font-size: 0.8em;
     .icon {
-      margin-right: .5em;
+      margin-right: 0.5em;
     }
   }
   .time-data {
@@ -74,28 +74,28 @@
   }
 }
 .hover-container:after {
-  content: '';
-  width: 0; 
-  height: 0; 
+  content: "";
+  width: 0;
+  height: 0;
   position: absolute;
   bottom: -18px;
   left: 50%;
   transform: translateX(-50%);
   border-left: 18px solid transparent;
   border-right: 18px solid transparent;
-  
+
   border-top: 18px solid #fff;
 }
 .hover-container:before {
-  content: '';
-  width: 0; 
-  height: 0; 
+  content: "";
+  width: 0;
+  height: 0;
   position: absolute;
   bottom: -19px;
   left: 50%;
   transform: translateX(-50%);
   border-left: 19px solid transparent;
   border-right: 19px solid transparent;
-  
+
   border-top: 19px solid #ccc;
 }

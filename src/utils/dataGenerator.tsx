@@ -31,14 +31,15 @@ const dataGenerator = (): ReturnedDataTypes => {
 
   // randomly generate availability for every minute
   for (let i = 1; i <= minutes; i++) {
-
     const convertToMS = (yesterdayMinutes + i) * 60000;
 
     const date = new Date(convertToMS);
     const day = date.getDate();
-    const month = date.toLocaleString("default", { month: "short" }).toUpperCase();
+    const month = date
+      .toLocaleString("default", { month: "short" })
+      .toUpperCase();
     const year = date.getFullYear().toString();
-    const formatYear = year.substr(year.length - 2)
+    const formatYear = year.substr(year.length - 2);
 
     const time = date.toLocaleTimeString("et-ET");
 

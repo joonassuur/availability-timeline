@@ -1,19 +1,13 @@
 import React from "react";
-import { MouseCoords, NotAvailable } from "../../../types/types";
+import { HoverElementProps } from "../../../types/types";
 import { WarningIcon, AlertIcon } from "../../icons/Icons";
 
-interface IProps {
-  mouseLocation: MouseCoords;
-  hoverDetails: String;
-  notAvailableTime: String;
-  notAvailableDetails: NotAvailable;
-}
-const HoverElement = ({
+const HoverElement: React.FC<HoverElementProps> = ({
   mouseLocation,
   hoverDetails,
   notAvailableTime,
   notAvailableDetails,
-}: IProps) => {
+}) => {
   return (
     <div
       style={{

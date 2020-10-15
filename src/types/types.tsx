@@ -21,4 +21,11 @@ export interface DataBarProps {
   minutesArray: any[];
   availabilityBars: string[];
 }
+
+export interface HoverElementProps {
+  mouseLocation: MouseCoords;
+  hoverDetails: String;
+  notAvailableTime: String;
+  notAvailableDetails: NotAvailable;
+}
 export type NotAvailable =  TempStruct[];

@@ -70,7 +70,7 @@ const DataBar: React.FC<DataBarProps> = ({
                     setHoverDetails(`${beginning} - ${end}`);
 
                     if (minutesArray[i].unavailable.length > 0) {
-                      // check is any minutes have "unavailable" as status
+                      // check if any minutes have "unavailable" as status
                       const filterStatus = minutesArray[i].unavailable.filter(
                         (e: any) => e.availability === "unavailable"
                       );
